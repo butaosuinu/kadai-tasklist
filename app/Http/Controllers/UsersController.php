@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\User;
+
 class UsersController extends Controller
 {
     /**
@@ -16,7 +18,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::paginate(10);
+
+        return view('users.index', [
+            'users' => $users,
+        ]);
     }
 
     /**
@@ -48,7 +54,11 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('users.show', [
+            'user' => $user,
+        ]);
     }
 
     /**
